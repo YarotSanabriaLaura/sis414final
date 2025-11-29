@@ -1,0 +1,43 @@
+<div class="card">
+  <h2><span class="line"></span> {{ editMode ? 'Editar Cocina' : 'Registrar Nueva Cocina' }}</h2>
+
+  <div class="form-row">
+    <input [(ngModel)]="nuevaCocina.nombre" placeholder="Nombre de la Cocina">
+    <input [(ngModel)]="nuevaCocina.ubicacion" placeholder="Ubicación">
+
+    <button class="btn-guardar" (click)="crearCocina()">
+      {{ editMode ? 'Guardar Cambios' : 'Guardar' }}
+    </button>
+
+    <button *ngIf="editMode" class="btn-cancelar" (click)="cancelarEdicion()">
+      Cancelar
+    </button>
+  </div>
+</div>
+
+<div class="card">
+  <h2><span class="line"></span> Listado de Cocinas</h2>
+
+  <table class="tabla">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Ubicación</th>
+        <th>Acción</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let c of cocinas">
+        <td>{{ c.id }}</td>
+        <td>{{ c.nombre }}</td>
+        <td>{{ c.ubicacion }}</td>
+        <td>
+          <button class="btn-editar" (click)="iniciarEdicion(c)">Editar</button>
+          <button class="btn-eliminar" (click)="eliminarCocina(c.id!)">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
