@@ -1,61 +1,28 @@
-<div class="card">
-  <h2><span class="line"></span> {{ editMode ? 'Editar Estufa' : 'Registrar Nueva Estufa' }}</h2>
+<form (ngSubmit)="crear()">
 
-  <div class="form-row">
-    <input [(ngModel)]="form.marca" placeholder="Marca">
-    <input [(ngModel)]="form.modelo" placeholder="Modelo">
-    <input [(ngModel)]="form.tipo" placeholder="Tipo">
-    <input [(ngModel)]="form.potencia" type="number" placeholder="Potencia (W)">
-  </div>
+  <input type="text" [(ngModel)]="form.marca" name="marca" placeholder="Marca" required>
 
-  <div class="form-row">
-    <input [(ngModel)]="form.descripcion" placeholder="Descripción">
+  <input type="text" [(ngModel)]="form.modelo" name="modelo" placeholder="Modelo" required>
 
-    <select [(ngModel)]="form.cocina">
-      <option [ngValue]="null">Seleccione una Cocina</option>
-      <option *ngFor="let c of cocinas" [ngValue]="c">{{ c.nombre }}</option>
-    </select>
+  <input type="text" [(ngModel)]="form.tipo" name="tipo" placeholder="Tipo" required>
 
-    <button class="btn-guardar" (click)="crear()">
-      {{ editMode ? 'Guardar Cambios' : 'Guardar' }}
-    </button>
+  <input type="number" [(ngModel)]="form.potencia" name="potencia" placeholder="Potencia">
 
-    <button *ngIf="editMode" class="btn-cancelar" (click)="cancelarEdicion()">
-      Cancelar
-    </button>
-  </div>
-</div>
+  <input type="text" [(ngModel)]="form.descripcion" name="descripcion" placeholder="Descripción">
 
-<div class="card">
-  <h2><span class="line"></span> Listado de Estufas</h2>
+  <select [(ngModel)]="form.cocina" name="cocina">
+    <option [ngValue]="null">Seleccione una Cocina</option>
+    <option *ngFor="let c of cocinas" [ngValue]="c.id">
+      {{ c.nombre }}
+    </option>
+  </select>
 
-  <table class="tabla">
-    <thead>
-      <tr>
-        <th>Marca</th>
-        <th>Modelo</th>
-        <th>Tipo</th>
-        <th>Potencia</th>
-        <th>Descripción</th>
-        <th>Cocina</th>
-        <th>Acción</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let e of estufas">
-        <td>{{ e.marca }}</td>
-        <td>{{ e.modelo }}</td>
-        <td>{{ e.tipo }}</td>
-        <td>{{ e.potencia }}</td>
-        <td>{{ e.descripcion }}</td>
-        <td>{{ e.cocina?.nombre ?? 'Sin asignar' }}</td>
+  <button type="submit">
+    {{ editMode ? 'Guardar Cambios' : 'Guardar' }}
+  </button>
 
-        <td>
-          <button class="btn-editar" (click)="iniciarEdicion(e)">Editar</button>
-          <button class="btn-eliminar" (click)="eliminar(e)">Eliminar</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+  <button *ngIf="editMode" (click)="cancelarEdicion()" type="button">
+    Cancelar
+  </button>
+</form>
 
