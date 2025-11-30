@@ -13,9 +13,7 @@ const browserDistFolder = join(import.meta.dirname, '../browser');
 const app = express();
 const angularApp = new AngularNodeAppEngine();
 
-/**
- * CORS FIX ESENCIAL PARA NGROK
- */
+
 app.use(
   cors({
     origin: '*',

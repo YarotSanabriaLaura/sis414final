@@ -12,11 +12,7 @@ export class CocinaService {
 private apiUrl = `${environment.apiBaseUrl}/cocinas`;
 
 
-
-
-
-
-  constructor(private http: HttpClient) {}
+constructor(private http: HttpClient) {}
 
   // READ: obtener todas las cocinas
   getAll(): Observable<Cocina[]> {

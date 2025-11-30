@@ -8,13 +8,12 @@ import { environment } from '../../environments/environment';
   providedIn: 'root'
 })
 export class EstufaService {
-private apiUrl = `${environment.apiBaseUrl}/estufas`;
+
+  private apiUrl = `${environment.apiBaseUrl}/estufas`;
 
 
 
-
-
-  constructor(private http: HttpClient) {}
+constructor(private http: HttpClient) {}
 
   // READ: obtener todas las estufas
   getAll(): Observable<Estufa[]> {
