@@ -9,29 +9,23 @@ import { environment } from '../../environments/environment';
 })
 export class CocinaService {
 
-private apiUrl = `${environment.apiBaseUrl}/cocinas`;
+  private apiUrl = `${environment.apiUrl}/cocinas`;
 
+  constructor(private http: HttpClient) {}
 
-constructor(private http: HttpClient) {}
-
-  // READ: obtener todas las cocinas
   getAll(): Observable<Cocina[]> {
     return this.http.get<Cocina[]>(this.apiUrl);
   }
 
-  // CREATE
-  create(cocina: Omit<Cocina, 'id'> | Cocina): Observable<Cocina> {
+  create(cocina: Omit<Cocina, 'id'>): Observable<Cocina> {
     return this.http.post<Cocina>(this.apiUrl, cocina);
   }
 
-  // UPDATE
   update(id: number, cocina: Cocina): Observable<Cocina> {
     return this.http.put<Cocina>(`${this.apiUrl}/${id}`, cocina);
   }
 
-  // DELETE
   delete(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
-

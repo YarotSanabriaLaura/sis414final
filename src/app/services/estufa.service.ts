@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { environment } from '../../environments/environment';
 import { Estufa } from '../models/estufa';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EstufaService {
 
-  private apiUrl = `${environment.apiBaseUrl}/estufas`;
+  private apiUrl = `${environment.apiUrl}/estufas`;
 
   constructor(private http: HttpClient) {}
 
@@ -17,11 +17,11 @@ export class EstufaService {
     return this.http.get<Estufa[]>(this.apiUrl);
   }
 
-  create(estufa: any): Observable<Estufa> {
+  create(estufa: Omit<Estufa, 'id'>): Observable<Estufa> {
     return this.http.post<Estufa>(this.apiUrl, estufa);
   }
 
-  update(id: number, estufa: any): Observable<Estufa> {
+  update(id: number, estufa: Estufa): Observable<Estufa> {
     return this.http.put<Estufa>(`${this.apiUrl}/${id}`, estufa);
   }
 
