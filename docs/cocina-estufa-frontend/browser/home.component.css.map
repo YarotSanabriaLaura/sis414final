@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["src/app/pages/home/home.component.css"],
-  "sourcesContent": [".hero-clean {\n  width: 100%;\n  height: 260px;\n  background: linear-gradient(135deg, #1b1b1b, #333);\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  text-align: center;\n  padding: 40px 20px;\n  border-bottom: 4px solid #c70000;\n}\n\n.hero-content h1 {\n  font-size: 42px;\n  font-weight: 800;\n  color: white;\n  margin-bottom: 10px;\n  text-transform: uppercase;\n  letter-spacing: 2px;\n}\n\n.hero-content p {\n  font-size: 18px;\n  color: #e0e0e0;\n  opacity: 0.85;\n}\n\n.main-wrapper {\n  padding: 40px 0;\n}\n"],
-  "mappings": ";AAAA,CAAC;AACC,SAAO;AACP,UAAQ;AACR;AAAA,IAAY;AAAA,MAAgB,MAAhB;AAAA,MAAwB,OAAxB;AAAA,MAAiC;AAC7C,WAAS;AACT,mBAAiB;AACjB,eAAa;AACb,cAAY;AACZ,WAAS,KAAK;AACd,iBAAe,IAAI,MAAM;AAC3B;AAEA,CAAC,aAAa;AACZ,aAAW;AACX,eAAa;AACb,SAAO;AACP,iBAAe;AACf,kBAAgB;AAChB,kBAAgB;AAClB;AAEA,CATC,aASa;AACZ,aAAW;AACX,SAAO;AACP,WAAS;AACX;AAEA,CAAC;AACC,WAAS,KAAK;AAChB;",
-  "names": []
-}
