@@ -8,25 +8,31 @@ import { environment } from '../../environments/environment';
   providedIn: 'root'
 })
 export class EstufaService {
+private apiUrl = `${environment.apiBaseUrl}/estufas`;
 
-  private apiUrl = `${environment.apiBaseUrl}/estufas`;
+
+
+
 
   constructor(private http: HttpClient) {}
 
+  // READ: obtener todas las estufas
   getAll(): Observable<Estufa[]> {
     return this.http.get<Estufa[]>(this.apiUrl);
   }
 
-  create(estufa: Estufa): Observable<Estufa> {
+  // CREATE
+  create(estufa: Omit<Estufa, 'id'> | Estufa): Observable<Estufa> {
     return this.http.post<Estufa>(this.apiUrl, estufa);
   }
 
+  // UPDATE
   update(id: number, estufa: Estufa): Observable<Estufa> {
     return this.http.put<Estufa>(`${this.apiUrl}/${id}`, estufa);
   }
 
+  // DELETE
   delete(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
-
