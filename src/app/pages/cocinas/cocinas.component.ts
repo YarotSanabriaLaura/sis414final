@@ -18,8 +18,8 @@ export class CocinasComponent implements OnInit {
 
   cocinas: Cocina[] = [];
 
-  // Formulario
-  nuevaCocina: Cocina = { id: 0, nombre: '', ubicacion: '' };
+  // Formulario SIN ID (esto es lo que soluciona el error)
+  nuevaCocina: Cocina = { nombre: '', ubicacion: '' };
 
   // Modo edición
   editMode = false;
@@ -41,16 +41,17 @@ export class CocinasComponent implements OnInit {
       return;
     }
 
+    // Crear cocina
     this.cocinaService.create(this.nuevaCocina).subscribe(() => {
-      this.nuevaCocina = { id: 0, nombre: '', ubicacion: '' };
+      this.nuevaCocina = { nombre: '', ubicacion: '' }; // limpio sin ID
       this.cargarCocinas();
     });
   }
 
   iniciarEdicion(cocina: Cocina): void {
     this.editMode = true;
-    this.cocinaEditando = { ...cocina }; 
-    this.nuevaCocina = { ...cocina };
+    this.cocinaEditando = { ...cocina };
+    this.nuevaCocina = { nombre: cocina.nombre, ubicacion: cocina.ubicacion };
   }
 
   guardarEdicion(): void {
@@ -60,7 +61,7 @@ export class CocinasComponent implements OnInit {
       .subscribe(() => {
         this.editMode = false;
         this.cocinaEditando = null;
-        this.nuevaCocina = { id: 0, nombre: '', ubicacion: '' };
+        this.nuevaCocina = { nombre: '', ubicacion: '' }; // limpio sin ID
         this.cargarCocinas();
       });
   }
@@ -68,7 +69,7 @@ export class CocinasComponent implements OnInit {
   cancelarEdicion(): void {
     this.editMode = false;
     this.cocinaEditando = null;
-    this.nuevaCocina = { id: 0, nombre: '', ubicacion: '' };
+    this.nuevaCocina = { nombre: '', ubicacion: '' };
   }
 
   eliminarCocina(id: number): void {

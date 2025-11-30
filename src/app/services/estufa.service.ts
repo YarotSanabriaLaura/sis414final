@@ -17,11 +17,11 @@ export class EstufaService {
     return this.http.get<Estufa[]>(this.apiUrl);
   }
 
-  create(estufa: Omit<Estufa, 'id'>): Observable<Estufa> {
+  create(estufa: any): Observable<Estufa> {
     return this.http.post<Estufa>(this.apiUrl, estufa);
   }
 
-  update(id: number, estufa: Estufa): Observable<Estufa> {
+  update(id: number, estufa: any): Observable<Estufa> {
     return this.http.put<Estufa>(`${this.apiUrl}/${id}`, estufa);
   }
 

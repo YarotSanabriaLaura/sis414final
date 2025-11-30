@@ -22,9 +22,8 @@ export class EstufasComponent implements OnInit {
   estufas: Estufa[] = [];
   cocinas: Cocina[] = [];
 
-  // Formulario
+  // Formulario: cocina es un OBJETO cocina o null
   form: Estufa = {
-    id: 0,
     marca: '',
     modelo: '',
     tipo: '',
@@ -33,7 +32,6 @@ export class EstufasComponent implements OnInit {
     cocina: null
   };
 
-  // Modo edición
   editMode = false;
   estufaEditando: Estufa | null = null;
 
@@ -43,55 +41,66 @@ export class EstufasComponent implements OnInit {
   }
 
   loadCocinas(): void {
-    this.cocinaService.getAll().subscribe((data: Cocina[]) => {
+    this.cocinaService.getAll().subscribe((data) => {
       this.cocinas = data;
     });
   }
 
   loadEstufas(): void {
-    this.estufaService.getAll().subscribe((data: Estufa[]) => {
+    this.estufaService.getAll().subscribe((data) => {
       this.estufas = data;
     });
   }
 
   crear(): void {
-    if (this.editMode) {
-      this.guardarEdicion();
-      return;
-    }
-
-    this.estufaService.create(this.form).subscribe(() => {
-      this.resetForm();
-      this.loadEstufas();
-    });
+  if (this.editMode) {
+    this.guardarEdicion();
+    return;
   }
+
+  const body: any = {
+    ...this.form,
+    cocina: this.form.cocina ? { id: this.form.cocina.id } : null
+  };
+
+  this.estufaService.create(body).subscribe(() => {
+    this.resetForm();
+    this.loadEstufas();
+  });
+}
+
 
   iniciarEdicion(estufa: Estufa): void {
     this.editMode = true;
     this.estufaEditando = { ...estufa };
 
     this.form = {
-      id: estufa.id!,
       marca: estufa.marca,
       modelo: estufa.modelo,
       tipo: estufa.tipo,
       potencia: estufa.potencia,
       descripcion: estufa.descripcion,
-      cocina: estufa.cocina
+      cocina: estufa.cocina ? { ...estufa.cocina } : null
     };
   }
 
-  guardarEdicion(): void {
-    if (!this.estufaEditando) return;
+ guardarEdicion(): void {
+  if (!this.estufaEditando) return;
 
-    this.estufaService.update(this.estufaEditando.id!, this.form)
-      .subscribe(() => {
-        this.editMode = false;
-        this.estufaEditando = null;
-        this.resetForm();
-        this.loadEstufas();
-      });
-  }
+  const body: any = {
+    ...this.form,
+    cocina: this.form.cocina ? { id: this.form.cocina.id } : null
+  };
+
+  this.estufaService.update(this.estufaEditando.id!, body)
+    .subscribe(() => {
+      this.editMode = false;
+      this.estufaEditando = null;
+      this.resetForm();
+      this.loadEstufas();
+    });
+}
+
 
   cancelarEdicion(): void {
     this.editMode = false;
@@ -109,7 +118,6 @@ export class EstufasComponent implements OnInit {
 
   resetForm(): void {
     this.form = {
-      id: 0,
       marca: '',
       modelo: '',
       tipo: '',

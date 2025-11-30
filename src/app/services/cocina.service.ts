@@ -17,11 +17,11 @@ export class CocinaService {
     return this.http.get<Cocina[]>(this.apiUrl);
   }
 
-  create(cocina: Omit<Cocina, 'id'>): Observable<Cocina> {
+  create(cocina: any): Observable<Cocina> {
     return this.http.post<Cocina>(this.apiUrl, cocina);
   }
 
-  update(id: number, cocina: Cocina): Observable<Cocina> {
+  update(id: number, cocina: any): Observable<Cocina> {
     return this.http.put<Cocina>(`${this.apiUrl}/${id}`, cocina);
   }
 

@@ -1,18 +1,18 @@
 <form (ngSubmit)="crear()">
 
-  <input type="text" [(ngModel)]="form.marca" name="marca" placeholder="Marca" required>
+  <input type="text" [(ngModel)]="form.marca" name="marca" placeholder="Marca" required />
 
-  <input type="text" [(ngModel)]="form.modelo" name="modelo" placeholder="Modelo" required>
+  <input type="text" [(ngModel)]="form.modelo" name="modelo" placeholder="Modelo" required />
 
-  <input type="text" [(ngModel)]="form.tipo" name="tipo" placeholder="Tipo" required>
+  <input type="text" [(ngModel)]="form.tipo" name="tipo" placeholder="Tipo" required />
 
-  <input type="number" [(ngModel)]="form.potencia" name="potencia" placeholder="Potencia">
+  <input type="number" [(ngModel)]="form.potencia" name="potencia" placeholder="Potencia" />
 
-  <input type="text" [(ngModel)]="form.descripcion" name="descripcion" placeholder="Descripción">
+  <input type="text" [(ngModel)]="form.descripcion" name="descripcion" placeholder="Descripción" />
 
   <select [(ngModel)]="form.cocina" name="cocina">
     <option [ngValue]="null">Seleccione una Cocina</option>
-    <option *ngFor="let c of cocinas" [ngValue]="c.id">
+    <option *ngFor="let c of cocinas" [ngValue]="c">
       {{ c.nombre }}
     </option>
   </select>
@@ -21,8 +21,8 @@
     {{ editMode ? 'Guardar Cambios' : 'Guardar' }}
   </button>
 
-  <button *ngIf="editMode" (click)="cancelarEdicion()" type="button">
+  <button *ngIf="editMode" type="button" (click)="cancelarEdicion()">
     Cancelar
   </button>
-</form>
 
+</form>
